@@ -2,6 +2,10 @@ package com.tui.proof.ws.dao;
 
 import com.tui.proof.dto.entity.Booking;
 import com.tui.proof.dto.entity.Flight;
+import com.tui.proof.dto.request.BookingRequest;
+import com.tui.proof.utils.Utils;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -14,6 +18,10 @@ import java.util.List;
 @Repository
 public class BookingDAO {
 
+    // In this class validate that the entity exist, conflicts, inserts, updates, deletes...
+
+    @Getter
+    @Setter
     private List<Booking> bookings = new ArrayList<Booking>(){{
         add(new Booking(
                 "Julio",
@@ -38,6 +46,11 @@ public class BookingDAO {
         ));
     }};
 
+    public void addBooking(BookingRequest request) {
+        // Map Request DTO to Entity because the Entities only must be use in DAOs
+        Booking booking = Utils.mapBookingRequestToBookingEntity(request);
 
-
+        // TODO: In this step will be the communication with the Database for insert the booking and verify that no conflict with others bookings.
+        bookings.add(booking);
+    }
 }

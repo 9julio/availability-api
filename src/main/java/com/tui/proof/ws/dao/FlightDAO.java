@@ -14,6 +14,8 @@ import java.util.List;
 @Repository
 public class FlightDAO {
 
+    // In this class validate that the entity exist, conflicts, inserts, updates, deletes...
+
     @Getter
     @Setter
     private List<Flight> flights = new ArrayList<Flight>(){{

@@ -1,8 +1,10 @@
 package com.tui.proof.ws.service;
 
 import com.tui.proof.dto.entity.Flight;
+import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.response.FlightResponse;
 import com.tui.proof.utils.Utils;
+import com.tui.proof.ws.dao.BookingDAO;
 import com.tui.proof.ws.dao.FlightDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class FlightService {
 
     @Autowired
     public FlightDAO flightDAO;
+
+    @Autowired
+    public BookingDAO bookingDAO;
 
     public List<FlightResponse> getAvailabilityFlights(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, Integer infants, Integer children, Integer adults) {
         List<FlightResponse> response = new ArrayList<FlightResponse>();
@@ -43,4 +48,7 @@ public class FlightService {
         return response;
     }
 
+    public void addBooking(BookingRequest request) {
+        bookingDAO.addBooking(request);
+    }
 }
