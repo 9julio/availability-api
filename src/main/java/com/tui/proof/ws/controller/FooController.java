@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FooController {
 
   @PostMapping("/")
-  public void test() {
+  void test() {
     log.info("Foo controller");
   }
 
