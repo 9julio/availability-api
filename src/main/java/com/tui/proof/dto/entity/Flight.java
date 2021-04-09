@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 // This class simulate the entity of Databases
 public class Flight {
@@ -70,5 +71,36 @@ public class Flight {
         this.date = date;
         this.hour = hour;
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return infants == flight.infants && children == flight.children && adults == flight.adults && Objects.equals(airportOrigin, flight.airportOrigin) && Objects.equals(airportDestination, flight.airportDestination) && Objects.equals(dateFrom, flight.dateFrom) && Objects.equals(dateTo, flight.dateTo) && Objects.equals(company, flight.company) && Objects.equals(flightNumber, flight.flightNumber) && Objects.equals(date, flight.date) && Objects.equals(hour, flight.hour) && Objects.equals(price, flight.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(airportOrigin, airportDestination, dateFrom, dateTo, infants, children, adults, company, flightNumber, date, hour, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "airportOrigin='" + airportOrigin + '\'' +
+                ", airportDestination='" + airportDestination + '\'' +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                ", infants=" + infants +
+                ", children=" + children +
+                ", adults=" + adults +
+                ", company='" + company + '\'' +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", date=" + date +
+                ", hour=" + hour +
+                ", price=" + price +
+                '}';
     }
 }

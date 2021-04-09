@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "757774fb-e1f6-4708-a1c0-6d4b92d5e6db",
+		"name": "Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/flights?airportOrigin=Madrid&airportDestination=London&dateFrom=2021-04-09&dateTo=2021-04-09&infants=0&children=0&adults=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"flights"
+					],
+					"query": [
+						{
+							"key": "airportOrigin",
+							"value": "Madrid"
+						},
+						{
+							"key": "airportDestination",
+							"value": "London"
+						},
+						{
+							"key": "dateFrom",
+							"value": "2021-04-09"
+						},
+						{
+							"key": "dateTo",
+							"value": "2021-04-09"
+						},
+						{
+							"key": "infants",
+							"value": "0"
+						},
+						{
+							"key": "children",
+							"value": "0"
+						},
+						{
+							"key": "adults",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

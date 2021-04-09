@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Objects;
 
 public class FlightResponse {
 
@@ -69,5 +69,36 @@ public class FlightResponse {
         this.date = date;
         this.hour = hour;
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FlightResponse that = (FlightResponse) o;
+        return infants == that.infants && children == that.children && adults == that.adults && Objects.equals(airportOrigin, that.airportOrigin) && Objects.equals(airportDestination, that.airportDestination) && Objects.equals(dateFrom, that.dateFrom) && Objects.equals(dateTo, that.dateTo) && Objects.equals(company, that.company) && Objects.equals(flightNumber, that.flightNumber) && Objects.equals(date, that.date) && Objects.equals(hour, that.hour) && Objects.equals(price, that.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(airportOrigin, airportDestination, dateFrom, dateTo, infants, children, adults, company, flightNumber, date, hour, price);
+    }
+
+    @Override
+    public String toString() {
+        return "FlightResponse{" +
+                "airportOrigin='" + airportOrigin + '\'' +
+                ", airportDestination='" + airportDestination + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", infants=" + infants +
+                ", children=" + children +
+                ", adults=" + adults +
+                ", company='" + company + '\'' +
+                ", flightNumber='" + flightNumber + '\'' +
+                ", date='" + date + '\'' +
+                ", hour='" + hour + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

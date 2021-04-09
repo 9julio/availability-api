@@ -17,7 +17,7 @@ public class FlightService {
     @Autowired
     public FlightDAO flightDAO;
 
-    public List<FlightResponse> getAvailabilityFlights(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, int infants, int children, int adults) {
+    public List<FlightResponse> getAvailabilityFlights(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, Integer infants, Integer children, Integer adults) {
         List<FlightResponse> response = new ArrayList<FlightResponse>();
 
         List<Flight> flights = flightDAO.getAvailabilityFlights(airportOrigin, airportDestination, dateFrom, dateTo, infants, children, adults);

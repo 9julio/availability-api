@@ -22,7 +22,7 @@ public class FlightDAO {
     }};
 
 
-    public List<Flight> getAvailabilityFlights(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, int infants, int children, int adults) {
+    public List<Flight> getAvailabilityFlights(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, Integer infants, Integer children, Integer adults) {
         // TODO: In this step will be the communication with the Database for filters to get the availabilities flights with the criteria filters.
         return getFlights();
     }
