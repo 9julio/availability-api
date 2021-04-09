@@ -17,11 +17,11 @@ public class FlightRequest {
 
     @Getter
     @Setter
-    private Date dateFrom;
+    private String dateFrom;
 
     @Getter
     @Setter
-    private Date dateTo;
+    private String dateTo;
 
     @Getter
     @Setter
@@ -35,7 +35,7 @@ public class FlightRequest {
     @Setter
     private int adults;
 
-    public FlightRequest(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, int infants, int children, int adults) {
+    public FlightRequest(String airportOrigin, String airportDestination, String dateFrom, String dateTo, int infants, int children, int adults) {
         this.airportOrigin = airportOrigin;
         this.airportDestination = airportDestination;
         this.dateFrom = dateFrom;

@@ -1,4 +1,4 @@
-package com.tui.proof.dto.response;
+package com.tui.proof.dto.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class FlightResponse {
+// This class simulate the entity of Databases
+public class Flight {
 
     @Getter
     @Setter
@@ -18,11 +19,11 @@ public class FlightResponse {
 
     @Getter
     @Setter
-    private String dateFrom;
+    private Date dateFrom;
 
     @Getter
     @Setter
-    private String dateTo;
+    private Date dateTo;
 
     @Getter
     @Setter
@@ -46,17 +47,17 @@ public class FlightResponse {
 
     @Getter
     @Setter
-    private String date;
+    private Date date;
 
     @Getter
     @Setter
-    private String hour;
+    private Date hour;
 
     @Getter
     @Setter
     private BigDecimal price;
 
-    public FlightResponse(String airportOrigin, String airportDestination, String dateFrom, String dateTo, int infants, int children, int adults, String company, String flightNumber, String date, String hour, BigDecimal price) {
+    public Flight(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, int infants, int children, int adults, String company, String flightNumber, Date date, Date hour, BigDecimal price) {
         this.airportOrigin = airportOrigin;
         this.airportDestination = airportDestination;
         this.dateFrom = dateFrom;
