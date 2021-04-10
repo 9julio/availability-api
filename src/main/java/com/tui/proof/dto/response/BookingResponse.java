@@ -1,6 +1,5 @@
 package com.tui.proof.dto.response;
 
-import com.tui.proof.dto.request.FlightRequest;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,9 +38,9 @@ public class BookingResponse {
 
     @Getter
     @Setter
-    private List<FlightRequest> flights;
+    private List<FlightResponse> flights;
 
-    public BookingResponse(String name, String lastName, String address, String postalCode, String country, String email, List<String> telephones, List<FlightRequest> flights) {
+    public BookingResponse(String name, String lastName, String address, String postalCode, String country, String email, List<String> telephones, List<FlightResponse> flights) {
         this.name = name;
         this.lastName = lastName;
         this.address = address;

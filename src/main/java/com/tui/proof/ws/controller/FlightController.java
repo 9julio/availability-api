@@ -2,7 +2,7 @@ package com.tui.proof.ws.controller;
 
 import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.request.FlightRequest;
-import com.tui.proof.utils.Utils;
+import com.tui.proof.utils.DateUtils;
 import com.tui.proof.ws.service.FlightService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +30,12 @@ public class FlightController {
     // Validate the format of the Dates
     Date dateFrom = null;
     if (request.getDateFrom() != null) {
-      dateFrom = Utils.convertStringDateToDateWithFormat(request.getDateFrom());
+      dateFrom = DateUtils.convertStringDateToDateWithFormat(request.getDateFrom());
     }
 
     Date dateTo = null;
     if (request.getDateTo() != null) {
-      dateTo = Utils.convertStringDateToDateWithFormat(request.getDateTo());
+      dateTo = DateUtils.convertStringDateToDateWithFormat(request.getDateTo());
     }
 
     return ResponseEntity.ok(flightService.getAvailabilityFlights(

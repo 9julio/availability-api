@@ -2,8 +2,10 @@ package com.tui.proof.ws.service;
 
 import com.tui.proof.dto.entity.Flight;
 import com.tui.proof.dto.request.BookingRequest;
+import com.tui.proof.dto.response.BookingResponse;
 import com.tui.proof.dto.response.FlightResponse;
-import com.tui.proof.utils.Utils;
+import com.tui.proof.utils.DateUtils;
+import com.tui.proof.utils.MapperUtils;
 import com.tui.proof.ws.dao.BookingDAO;
 import com.tui.proof.ws.dao.FlightDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,15 @@ public class FlightService {
             response.add(new FlightResponse(
                     flight.getAirportOrigin(),
                     flight.getAirportDestination(),
-                    Utils.convertDateToDateFormat(flight.getDateFrom()),
-                    Utils.convertDateToDateFormat(flight.getDateTo()),
+                    DateUtils.convertDateToDateFormat(flight.getDateFrom()),
+                    DateUtils.convertDateToDateFormat(flight.getDateTo()),
                     flight.getInfants(),
                     flight.getChildren(),
                     flight.getAdults(),
                     flight.getCompany(),
                     flight.getFlightNumber(),
-                    Utils.convertDateToDateFormat(flight.getDate()),
-                    Utils.convertDateToHourFormat(flight.getHour()),
+                    DateUtils.convertDateToDateFormat(flight.getDate()),
+                    DateUtils.convertDateToHourFormat(flight.getHour()),
                     flight.getPrice()
             ));
         }
@@ -49,6 +51,12 @@ public class FlightService {
     }
 
     public void addBooking(BookingRequest request) {
-        bookingDAO.addBooking(request);
+        // TODO: Do all the business logic for verify that is correct.
+        bookingDAO.addBooking(MapperUtils.mapBookingRequestToBookingEntity(request));
     }
+
+    public List<BookingResponse> getAllBookings() {
+        return MapperUtils.mapBookingEntityListToBookingResponseList(bookingDAO.getAllBookings());
+    }
+
 }
