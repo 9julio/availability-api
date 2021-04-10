@@ -29,7 +29,9 @@ public class BookingDAO {
                 "Spain",
                 "myEmail",
                 Arrays.asList("654 789 123", "693 582 471"),
-                Arrays.asList(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN))
+                new ArrayList<Flight>() {{
+                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN));
+                }}
         ));
 
         add(new Booking(
@@ -40,7 +42,9 @@ public class BookingDAO {
                 "Spain",
                 "myEmail",
                 Arrays.asList("654 789 123", "693 582 471"),
-                Arrays.asList(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany2", "number2", new Date(), new Date(), BigDecimal.TEN))
+                new ArrayList<Flight>() {{
+                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany2", "number2", new Date(), new Date(), BigDecimal.TEN));
+                }}
         ));
     }};
 
@@ -51,5 +55,10 @@ public class BookingDAO {
 
     public List<Booking> getAllBookings() {
         return getBookings();
+    }
+
+    public void addFlightToBooking(Long bookingId, Flight flight) {
+        // The zero will be the BookingId in Database
+        bookings.get(0).getFlights().add(flight);
     }
 }

@@ -83,6 +83,31 @@ public class FlightControllerTests {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    public void testOk_addFlightToBooking() {
+
+        HttpEntity<FlightRequest> entity = new HttpEntity<FlightRequest>(
+                new FlightRequest(
+                        "Malaga",
+                        "Roma",
+                        "2022-04-05",
+                        "2022-04-09",
+                        12,
+                        45,
+                        67
+                )
+        );
+
+        ResponseEntity response = restTemplate.exchange(
+                createURLWithPort("/bookings/1/flights"),
+                HttpMethod.POST,
+                entity,
+                Object.class);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }

@@ -85,4 +85,20 @@ public class FlightServiceTests {
         // Assert.assertEquals(3, allBookings.size());
     }
 
+
+    @Test
+    public void test_addFlightToBooking_OK() {
+
+        FlightRequest request = new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1);
+
+        Mockito.doNothing().when(bookingDAOMock).addFlightToBooking(ArgumentMatchers.anyLong(), ArgumentMatchers.any());
+
+        flightService.addFlightToBooking(1L, request);
+
+        // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
+        // List<BookingResponse> allBookings = flightService.getAllBookings();
+        // Assert.assertNotNull(allBookings);
+        // Assert.assertEquals(3, allBookings.size());
+    }
+
 }

@@ -2,6 +2,7 @@ package com.tui.proof.ws.service;
 
 import com.tui.proof.dto.entity.Flight;
 import com.tui.proof.dto.request.BookingRequest;
+import com.tui.proof.dto.request.FlightRequest;
 import com.tui.proof.dto.response.BookingResponse;
 import com.tui.proof.dto.response.FlightResponse;
 import com.tui.proof.utils.DateUtils;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FlightService {
@@ -59,4 +61,11 @@ public class FlightService {
         return MapperUtils.mapBookingEntityListToBookingResponseList(bookingDAO.getAllBookings());
     }
 
+    public void addFlightToBooking(Long bookingId, FlightRequest flightRequest) {
+        // TODO: In this step must be search in Database the Booking with the Id exist and it is correct with the data,
+        //  but in this case, I will add all the flights for the same Booking. In Database, the booking and flights will be join by a foreign key and
+        //  Booking could be have 0 to a lot of Flights.
+
+        bookingDAO.addFlightToBooking(bookingId, MapperUtils.mapFlightRequestToFlightEntity(flightRequest));
+    }
 }

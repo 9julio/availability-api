@@ -79,6 +79,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Add Flight to Booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"airportOrigin\" : \"Miguelturra\",\r\n    \"airportDestination\" : \"Cordoba\",\r\n    \"dateFrom\" : \"2021-07-15\",\r\n    \"dateTo\" : \"2021-07-19\",\r\n    \"infants\" : 34,\r\n    \"children\" : 2,\r\n    \"adults\" : 45\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookings/1/flights",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings",
+						"1",
+						"flights"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

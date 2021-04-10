@@ -8,10 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -85,6 +82,36 @@ public class FlightController {
     }
 
     flightService.addBooking(request);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+
+  @PostMapping("/bookings/{bookingId}/flights")
+  public ResponseEntity addBooking(@PathVariable("bookingId") String bookingId,
+                                   @RequestBody FlightRequest flightRequest) {
+
+    // Validate the path
+    if (bookingId == null) {
+      return ResponseEntity
+              .status(HttpStatus.NOT_FOUND)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    Long booking = Long.valueOf(bookingId);
+    if (booking == null) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    if (flightRequest == null) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("The flight request must not be null or contain empty values!");
+    }
+
+    flightService.addFlightToBooking(booking, flightRequest);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }
