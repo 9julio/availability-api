@@ -3,6 +3,7 @@ package controllers;
 import com.tui.proof.MainApplication;
 import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.request.FlightRequest;
+import com.tui.proof.dto.response.BookingResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -119,6 +120,25 @@ public class FlightControllerTests {
 
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testOk_getBookings() {
+
+//        ResponseEntity<List<BookingResponse>> response = restTemplate.exchange(
+//                createURLWithPort("/bookings"),
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<BookingResponse>>(){});
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                createURLWithPort("/bookings"),
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Object>(){});
+
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
     }
 
     private String createURLWithPort(String uri) {

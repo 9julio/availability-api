@@ -1,8 +1,10 @@
 package services;
 
+import com.tui.proof.dto.entity.Booking;
 import com.tui.proof.dto.entity.Flight;
 import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.request.FlightRequest;
+import com.tui.proof.dto.response.BookingResponse;
 import com.tui.proof.dto.response.FlightResponse;
 import com.tui.proof.ws.dao.BookingDAO;
 import com.tui.proof.ws.dao.FlightDAO;
@@ -52,7 +54,7 @@ public class FlightServiceTests {
                 ArgumentMatchers.anyInt()
         )).thenReturn(flights);
 
-        List<FlightResponse> response = flightService.getAvailabilityFlights("Madrid", "London", null, null, 0, 0, 0);
+        List<FlightResponse> response = flightService.getAvailabilityFlights(new FlightRequest("Madrid", "London", null, null, 0, 0, 0));
         Assert.assertNotNull(response);
         Assert.assertEquals(2, response.size());
     }
@@ -112,6 +114,60 @@ public class FlightServiceTests {
         // List<BookingResponse> allBookings = flightService.getAllBookings();
         // Assert.assertNotNull(allBookings);
         // Assert.assertEquals(2, allBookings.size());
+    }
+
+    @Test
+    public void test_getBookings_OK() {
+
+        List<Flight> flights = new ArrayList<Flight>(){{
+            add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN));
+            add(new Flight("London", "Madrid", new Date(), new Date(), 1, 4, 34, "myCompany2", "number2", new Date(), new Date(), BigDecimal.ONE));
+        }};
+
+        List<Booking> bookings = new ArrayList<Booking>(){{
+            add(new Booking(
+                    "someName",
+                    "someLastName",
+                    "someAddress",
+                    "somePostalCode",
+                    "someCountry",
+                    "someEmail",
+                    Arrays.asList("765 234 456"),
+                    flights
+            ));
+        }};
+
+        Mockito.when(bookingDAOMock.getBookings(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyList(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt()
+        )).thenReturn(bookings);
+
+        BookingRequest bookingRequest = new BookingRequest(
+                "someName",
+                "someLastName",
+                "someAddress",
+                "somePostalCode",
+                "someCountry",
+                "someEmail",
+                Arrays.asList("765 234 456"),
+                null
+        );
+
+        List<BookingResponse> response = flightService.getBookings(bookingRequest);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(1, response.size());
     }
 
 }

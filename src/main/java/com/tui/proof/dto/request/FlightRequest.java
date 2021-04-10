@@ -3,7 +3,6 @@ package com.tui.proof.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class FlightRequest {

@@ -20,7 +20,7 @@ public class BookingDAO {
 
     @Getter
     @Setter
-    private List<Booking> bookings = new ArrayList<Booking>(){{
+    private List<Booking> bookingsMockList = new ArrayList<Booking>(){{
         add(new Booking(
                 "Julio",
                 "Fernandez",
@@ -48,22 +48,40 @@ public class BookingDAO {
         ));
     }};
 
+    public List<Booking> getBookings(String name,
+                                     String lastName,
+                                     String address,
+                                     String postalCode,
+                                     String country,
+                                     String email,
+                                     List<String> telephones,
+                                     String airportOrigin,
+                                     String airportDestination,
+                                     String dateFrom,
+                                     String dateTo,
+                                     int infants,
+                                     int children,
+                                     int adults) {
+        // TODO: In this step will be the communication with the Database for filters to get the availabilities flights with the criteria filters.
+        return getBookingsMockList();
+    }
+
     public void addBooking(Booking booking) {
         // TODO: In this step will be the communication with the Database for insert the booking and verify that no conflict with others bookings.
-        bookings.add(booking);
+        bookingsMockList.add(booking);
     }
 
     public List<Booking> getAllBookings() {
-        return getBookings();
+        return getBookingsMockList();
     }
 
     public void addFlightToBooking(Long bookingId, Flight flight) {
         // The zero will be the BookingId in Database
-        bookings.get(0).getFlights().add(flight);
+        bookingsMockList.get(0).getFlights().add(flight);
     }
 
     public void deleteAFlightInABooking(Long bookingId, Long flightId) {
         // The first zero will be the BookingId in Database and the second 0 is the flightId
-        bookings.get(0).getFlights().remove(0);
+        bookingsMockList.get(0).getFlights().remove(0);
     }
 }

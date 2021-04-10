@@ -138,6 +138,82 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Booking Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookings?name=Juan&lastName=Pepe&address=address&postalCode=postalCode&country=country&email=email&telephones=123&airportOrigin=Madrid&airportDestination=London&dateFrom=2021-04-09&dateTo=2021-04-09&infants=0&children=0&adults=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Juan"
+						},
+						{
+							"key": "lastName",
+							"value": "Pepe"
+						},
+						{
+							"key": "address",
+							"value": "address"
+						},
+						{
+							"key": "postalCode",
+							"value": "postalCode"
+						},
+						{
+							"key": "country",
+							"value": "country"
+						},
+						{
+							"key": "email",
+							"value": "email"
+						},
+						{
+							"key": "telephones",
+							"value": "123"
+						},
+						{
+							"key": "airportOrigin",
+							"value": "Madrid"
+						},
+						{
+							"key": "airportDestination",
+							"value": "London"
+						},
+						{
+							"key": "dateFrom",
+							"value": "2021-04-09"
+						},
+						{
+							"key": "dateTo",
+							"value": "2021-04-09"
+						},
+						{
+							"key": "infants",
+							"value": "0"
+						},
+						{
+							"key": "children",
+							"value": "0"
+						},
+						{
+							"key": "adults",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

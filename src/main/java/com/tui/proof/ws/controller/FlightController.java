@@ -2,6 +2,7 @@ package com.tui.proof.ws.controller;
 
 import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.request.FlightRequest;
+import com.tui.proof.dto.response.BookingResponse;
 import com.tui.proof.utils.DateUtils;
 import com.tui.proof.ws.service.FlightService;
 import lombok.extern.log4j.Log4j2;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Log4j2
 @RestController
@@ -24,26 +26,17 @@ public class FlightController {
 
     // FlightRequest can be null, it is indicate that the user do not filter by criterias.
 
-    // Validate the format of the Dates
-    Date dateFrom = null;
-    if (request.getDateFrom() != null) {
-      dateFrom = DateUtils.convertStringDateToDateWithFormat(request.getDateFrom());
-    }
+    return ResponseEntity.ok(flightService.getAvailabilityFlights(request));
+  }
 
-    Date dateTo = null;
-    if (request.getDateTo() != null) {
-      dateTo = DateUtils.convertStringDateToDateWithFormat(request.getDateTo());
-    }
+  @GetMapping("/bookings")
+  public ResponseEntity getBookings(BookingRequest request) {
 
-    return ResponseEntity.ok(flightService.getAvailabilityFlights(
-            request.getAirportOrigin(),
-            request.getAirportDestination(),
-            dateFrom,
-            dateTo,
-            request.getInfants(),
-            request.getChildren(),
-            request.getAdults()
-    ));
+    // BookingRequest can be null, it is indicate that the user do not filter by criterias.
+
+    List<BookingResponse> response = flightService.getBookings(request);
+
+    return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
   @PostMapping("/bookings")
@@ -117,7 +110,7 @@ public class FlightController {
 
   @DeleteMapping("/bookings/{bookingId}/flights/{flightId}")
   public ResponseEntity deleteAFlightInABooking(@PathVariable("bookingId") String bookingId,
-                                   @PathVariable("flightId") String flightId) {
+                                                @PathVariable("flightId") String flightId) {
 
     // Validate the path
     if (bookingId == null) {
