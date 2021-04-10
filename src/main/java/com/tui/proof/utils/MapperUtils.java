@@ -91,7 +91,7 @@ public class MapperUtils {
                 null,
                 null,
                 null,
-                null,
+                DateUtils.convertStringDateToDateWithFormat(flightRequest.getDateOfCreationInBooking()),
                 null
         );
     }
@@ -118,11 +118,11 @@ public class MapperUtils {
                 flight.getInfants(),
                 flight.getChildren(),
                 flight.getAdults(),
-                null,
-                null,
-                null,
-                null,
-                null
+                flight.getCompany(),
+                flight.getFlightNumber(),
+                DateUtils.convertDateToDateFormat(flight.getDate()),
+                DateUtils.convertDateToHourFormat(flight.getHour()),
+                flight.getPrice()
         );
     }
 
