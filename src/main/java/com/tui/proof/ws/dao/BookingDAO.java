@@ -71,10 +71,6 @@ public class BookingDAO {
         bookingsMockList.add(booking);
     }
 
-    public List<Booking> getAllBookings() {
-        return getBookingsMockList();
-    }
-
     public void addFlightToBooking(Long bookingId, Flight flight) {
         // The zero will be the BookingId in Database
         bookingsMockList.get(0).getFlights().add(flight);
@@ -83,5 +79,10 @@ public class BookingDAO {
     public void deleteAFlightInABooking(Long bookingId, Long flightId) {
         // The first zero will be the BookingId in Database and the second 0 is the flightId
         bookingsMockList.get(0).getFlights().remove(0);
+    }
+
+    public void deleteABooking(Long bookingId) {
+        // The first zero will be the BookingId
+        bookingsMockList.remove(0);
     }
 }

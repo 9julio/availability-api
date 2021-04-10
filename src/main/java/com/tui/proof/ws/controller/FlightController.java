@@ -26,6 +26,7 @@ public class FlightController {
 
     // FlightRequest can be null, it is indicate that the user do not filter by criterias.
 
+    // If don't search anything, the search is OK but without elements. Return an OK code but empty body
     return ResponseEntity.ok(flightService.getAvailabilityFlights(request));
   }
 
@@ -36,6 +37,7 @@ public class FlightController {
 
     List<BookingResponse> response = flightService.getBookings(request);
 
+    // If don't search anything, the search is OK but without elements. Return an OK code but empty body
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
@@ -75,6 +77,28 @@ public class FlightController {
     }
 
     flightService.addBooking(request);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @DeleteMapping("/bookings/{bookingId}")
+  public ResponseEntity deleteABooking(@PathVariable("bookingId") String bookingId) {
+
+    // Validate the path
+    if (bookingId == null) {
+      return ResponseEntity
+              .status(HttpStatus.NOT_FOUND)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    Long booking = Long.valueOf(bookingId);
+    if (booking == null) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    flightService.deleteABooking(booking);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }

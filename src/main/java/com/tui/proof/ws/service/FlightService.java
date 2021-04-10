@@ -38,6 +38,7 @@ public class FlightService {
                 flightRequest.getChildren(),
                 flightRequest.getAdults());
 
+        // If don't search anything, the search is OK but without elements. Return an OK code but empty body
         // Map Entity DTO to Response DTO
         return MapperUtils.mapFlightEntityListToFlightResponseList(flights);
     }
@@ -63,11 +64,8 @@ public class FlightService {
                 1
         );
 
+        // If don't search anything, the search is OK but without elements. Return an OK code but empty body
         return MapperUtils.mapBookingEntityListToBookingResponseList(bookingList);
-    }
-
-    public List<BookingResponse> getAllBookings() {
-        return MapperUtils.mapBookingEntityListToBookingResponseList(bookingDAO.getAllBookings());
     }
 
     public void addBooking(BookingRequest request) {
@@ -85,5 +83,13 @@ public class FlightService {
 
     public void deleteAFlightInABooking(Long bookingId, Long flightId) {
         bookingDAO.deleteAFlightInABooking(bookingId, flightId);
+    }
+
+    public void deleteABooking(Long bookingId) {
+        // TODO: In this step must be search in Database the Booking with the Id exist and it is correct with the data,
+        //  but in this case, I will delete the first Booking. In Database, the booking and flights will be join by a foreign key and
+        //  Booking could be have 0 to a lot of Flights and when Delete a Booking, previously must be delete the Flights.
+        //  For example, If the booking don't exist, return a OK and don't delete anything.
+        bookingDAO.deleteABooking(bookingId);
     }
 }
