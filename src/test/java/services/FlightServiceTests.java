@@ -85,7 +85,6 @@ public class FlightServiceTests {
         // Assert.assertEquals(3, allBookings.size());
     }
 
-
     @Test
     public void test_addFlightToBooking_OK() {
 
@@ -99,6 +98,20 @@ public class FlightServiceTests {
         // List<BookingResponse> allBookings = flightService.getAllBookings();
         // Assert.assertNotNull(allBookings);
         // Assert.assertEquals(3, allBookings.size());
+    }
+
+
+    @Test
+    public void test_deleteAFlightInABooking_OK() {
+
+        Mockito.doNothing().when(bookingDAOMock).deleteAFlightInABooking(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong());
+
+        flightService.deleteAFlightInABooking(1L, 1L);
+
+        // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
+        // List<BookingResponse> allBookings = flightService.getAllBookings();
+        // Assert.assertNotNull(allBookings);
+        // Assert.assertEquals(2, allBookings.size());
     }
 
 }

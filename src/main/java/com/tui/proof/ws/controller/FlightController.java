@@ -86,7 +86,6 @@ public class FlightController {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-
   @PostMapping("/bookings/{bookingId}/flights")
   public ResponseEntity addBooking(@PathVariable("bookingId") String bookingId,
                                    @RequestBody FlightRequest flightRequest) {
@@ -112,6 +111,42 @@ public class FlightController {
     }
 
     flightService.addFlightToBooking(booking, flightRequest);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  @DeleteMapping("/bookings/{bookingId}/flights/{flightId}")
+  public ResponseEntity deleteAFlightInABooking(@PathVariable("bookingId") String bookingId,
+                                   @PathVariable("flightId") String flightId) {
+
+    // Validate the path
+    if (bookingId == null) {
+      return ResponseEntity
+              .status(HttpStatus.NOT_FOUND)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    Long booking = Long.valueOf(bookingId);
+    if (booking == null) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("The bookingId must not be null or contain empty values!");
+    }
+
+    if (flightId == null) {
+      return ResponseEntity
+              .status(HttpStatus.NOT_FOUND)
+              .body("The flightId must not be null or contain empty values!");
+    }
+
+    Long flight = Long.valueOf(flightId);
+    if (flight == null) {
+      return ResponseEntity
+              .status(HttpStatus.BAD_REQUEST)
+              .body("The flightId must not be null or contain empty values!");
+    }
+
+    flightService.deleteAFlightInABooking(booking, flight);
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }
