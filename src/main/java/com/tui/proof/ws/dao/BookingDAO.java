@@ -61,4 +61,9 @@ public class BookingDAO {
         // The zero will be the BookingId in Database
         bookings.get(0).getFlights().add(flight);
     }
+
+    public void deleteAFlightInABooking(Long bookingId, Long flightId) {
+        // The first zero will be the BookingId in Database and the second 0 is the flightId
+        bookings.get(0).getFlights().remove(0);
+    }
 }

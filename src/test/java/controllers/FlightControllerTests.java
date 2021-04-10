@@ -108,6 +108,19 @@ public class FlightControllerTests {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    public void testOk_deleteAFlightInABooking() {
+
+        ResponseEntity response = restTemplate.exchange(
+                createURLWithPort("/bookings/1/flights/1"),
+                HttpMethod.DELETE,
+                null,
+                Object.class);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }

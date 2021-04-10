@@ -108,6 +108,36 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete a Flight to a Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookings/1/flights/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings",
+						"1",
+						"flights",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

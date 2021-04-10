@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class FlightService {
@@ -67,5 +66,9 @@ public class FlightService {
         //  Booking could be have 0 to a lot of Flights.
 
         bookingDAO.addFlightToBooking(bookingId, MapperUtils.mapFlightRequestToFlightEntity(flightRequest));
+    }
+
+    public void deleteAFlightInABooking(Long bookingId, Long flightId) {
+        bookingDAO.deleteAFlightInABooking(bookingId, flightId);
     }
 }
