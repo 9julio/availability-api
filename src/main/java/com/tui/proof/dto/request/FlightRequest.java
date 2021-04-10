@@ -3,6 +3,7 @@ package com.tui.proof.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class FlightRequest {
@@ -35,7 +36,11 @@ public class FlightRequest {
     @Setter
     private Integer adults;
 
-    public FlightRequest(String airportOrigin, String airportDestination, String dateFrom, String dateTo, Integer infants, Integer children, Integer adults) {
+    @Getter
+    @Setter
+    private String dateOfCreationInBooking;
+
+    public FlightRequest(String airportOrigin, String airportDestination, String dateFrom, String dateTo, Integer infants, Integer children, Integer adults, String dateOfCreationInBooking) {
         this.airportOrigin = airportOrigin;
         this.airportDestination = airportDestination;
         this.dateFrom = dateFrom;
@@ -43,6 +48,7 @@ public class FlightRequest {
         this.infants = infants;
         this.children = children;
         this.adults = adults;
+        this.dateOfCreationInBooking = dateOfCreationInBooking;
     }
 
     @Override

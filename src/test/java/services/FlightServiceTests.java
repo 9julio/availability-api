@@ -17,6 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,8 +42,8 @@ public class FlightServiceTests {
     public void test_getAvailabilityFlights_OK() {
 
         List<Flight> flights = new ArrayList<Flight>(){{
-            add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN));
-            add(new Flight("London", "Madrid", new Date(), new Date(), 1, 4, 34, "myCompany2", "number2", new Date(), new Date(), BigDecimal.ONE));
+            add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN, new Date(), null));
+            add(new Flight("London", "Madrid", new Date(), new Date(), 1, 4, 34, "myCompany2", "number2", new Date(), new Date(), BigDecimal.ONE, new Date(), null));
         }};
 
         Mockito.when(flightDAOMock.getAvailabilityFlights(
@@ -54,7 +56,7 @@ public class FlightServiceTests {
                 ArgumentMatchers.anyInt()
         )).thenReturn(flights);
 
-        List<FlightResponse> response = flightService.getAvailabilityFlights(new FlightRequest("Madrid", "London", null, null, 0, 0, 0));
+        List<FlightResponse> response = flightService.getAvailabilityFlights(new FlightRequest("Madrid", "London", null, null, 0, 0, 0, "2022-04-05-12:12"));
         Assert.assertNotNull(response);
         Assert.assertEquals(2, response.size());
     }
@@ -63,8 +65,8 @@ public class FlightServiceTests {
     public void test_addBooking_OK() {
 
         List<FlightRequest> flightRequestList = new ArrayList<FlightRequest>(){{
-            add(new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1));
-            add(new FlightRequest("London", "Madrid", "2021-04-05", "2021-04-05", 1, 4, 34));
+            add(new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1, "2022-04-05-12:12"));
+            add(new FlightRequest("London", "Madrid", "2021-04-05", "2021-04-05", 1, 4, 34, "2022-04-05-12:12"));
         }};
 
         BookingRequest bookingRequest = new BookingRequest(
@@ -79,7 +81,9 @@ public class FlightServiceTests {
 
         Mockito.doNothing().when(bookingDAOMock).addBooking(ArgumentMatchers.any());
 
-        flightService.addBooking(bookingRequest);
+        ResponseEntity response = flightService.addBooking(bookingRequest);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
         // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
         // List<BookingResponse> allBookings = flightService.getAllBookings();
@@ -90,11 +94,13 @@ public class FlightServiceTests {
     @Test
     public void test_addFlightToBooking_OK() {
 
-        FlightRequest request = new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1);
+        FlightRequest request = new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1, "2022-04-05-12:12");
 
         Mockito.doNothing().when(bookingDAOMock).addFlightToBooking(ArgumentMatchers.anyLong(), ArgumentMatchers.any());
 
-        flightService.addFlightToBooking(1L, request);
+        ResponseEntity response = flightService.addFlightToBooking(1L, request);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
 
         // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
         // List<BookingResponse> allBookings = flightService.getAllBookings();
@@ -107,7 +113,9 @@ public class FlightServiceTests {
 
         Mockito.doNothing().when(bookingDAOMock).deleteAFlightInABooking(ArgumentMatchers.anyLong(), ArgumentMatchers.anyLong());
 
-        flightService.deleteAFlightInABooking(1L, 1L);
+        ResponseEntity response = flightService.deleteAFlightInABooking(1L, 1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
         // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
         // List<BookingResponse> allBookings = flightService.getAllBookings();
@@ -119,8 +127,8 @@ public class FlightServiceTests {
     public void test_getBookings_OK() {
 
         List<Flight> flights = new ArrayList<Flight>(){{
-            add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN));
-            add(new Flight("London", "Madrid", new Date(), new Date(), 1, 4, 34, "myCompany2", "number2", new Date(), new Date(), BigDecimal.ONE));
+            add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN, new Date(), null));
+            add(new Flight("London", "Madrid", new Date(), new Date(), 1, 4, 34, "myCompany2", "number2", new Date(), new Date(), BigDecimal.ONE, new Date(), null));
         }};
 
         List<Booking> bookings = new ArrayList<Booking>(){{
@@ -173,12 +181,21 @@ public class FlightServiceTests {
 
         Mockito.doNothing().when(bookingDAOMock).deleteABooking(ArgumentMatchers.anyLong());
 
-        flightService.deleteABooking(1L);
+        ResponseEntity response = flightService.deleteABooking(1L);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 
         // TODO: This mock not obtain the correct list of Bookings for tests, the best test for this cause is with Postman.
         // List<BookingResponse> allBookings = flightService.getAllBookings();
         // Assert.assertNotNull(allBookings);
         // Assert.assertEquals(1, allBookings.size());
+    }
+
+    @Test
+    public void test_confirmABooking_OK() {
+        ResponseEntity responseEntity = flightService.confirmABooking(1L);
+        Assert.assertNotNull(responseEntity);
+        Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
 }

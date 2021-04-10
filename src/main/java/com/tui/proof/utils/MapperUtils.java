@@ -90,6 +90,8 @@ public class MapperUtils {
                 null,
                 null,
                 null,
+                null,
+                null,
                 null
         );
     }

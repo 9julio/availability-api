@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -69,7 +70,8 @@ public class FlightControllerTests {
                         "2022-04-09",
                         12,
                         45,
-                        67
+                        67,
+                        "2022-04-05-12:12"
                 ))
         ));
 
@@ -77,10 +79,43 @@ public class FlightControllerTests {
                 createURLWithPort("/bookings"),
                 HttpMethod.POST,
                 entity,
-                Object.class);
+                new ParameterizedTypeReference<Object>(){});
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    @Test
+    public void testBadRequest_addBooking_withEmptyBody() {
+
+        HttpEntity<BookingRequest> entity = new HttpEntity<BookingRequest>(new BookingRequest(
+                null,
+                "Rodrigo",
+                "myAddress3",
+                "myPostalCode",
+                "Spain",
+                "myEmail",
+                Arrays.asList("854 345 567"),
+                Arrays.asList(new FlightRequest(
+                        "Malaga",
+                        "Roma",
+                        "2022-04-05",
+                        "2022-04-09",
+                        12,
+                        45,
+                        67,
+                        "2022-04-05-12:12"
+                ))
+        ));
+
+        ResponseEntity response = restTemplate.exchange(
+                createURLWithPort("/bookings"),
+                HttpMethod.POST,
+                entity,
+                new ParameterizedTypeReference<String>(){});
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test
@@ -94,7 +129,8 @@ public class FlightControllerTests {
                         "2022-04-09",
                         12,
                         45,
-                        67
+                        67,
+                        "2022-04-05-12:12"
                 )
         );
 
@@ -102,10 +138,10 @@ public class FlightControllerTests {
                 createURLWithPort("/bookings/1/flights"),
                 HttpMethod.POST,
                 entity,
-                Object.class);
+                new ParameterizedTypeReference<Object>(){});
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test
@@ -115,7 +151,7 @@ public class FlightControllerTests {
                 createURLWithPort("/bookings/1/flights/1"),
                 HttpMethod.DELETE,
                 null,
-                Object.class);
+                new ParameterizedTypeReference<Object>(){});
 
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -146,6 +182,32 @@ public class FlightControllerTests {
         ResponseEntity<Object> response = restTemplate.exchange(
                 createURLWithPort("/bookings/1"),
                 HttpMethod.DELETE,
+                null,
+                new ParameterizedTypeReference<Object>(){});
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testBadRequest_deleteABooking_withBadBookingId() {
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/bookings/aa"),
+                HttpMethod.DELETE,
+                null,
+                new ParameterizedTypeReference<String>(){});
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    public void testOk_confirmABooking() {
+
+        ResponseEntity<Object> response = restTemplate.exchange(
+                createURLWithPort("/bookings/1"),
+                HttpMethod.PUT,
                 null,
                 new ParameterizedTypeReference<Object>(){});
 

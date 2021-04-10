@@ -17,7 +17,6 @@ import java.util.List;
 public class BookingDAO {
 
     // In this class validate that the entity exist, conflicts, inserts, updates, deletes...
-
     @Getter
     @Setter
     private List<Booking> bookingsMockList = new ArrayList<Booking>(){{
@@ -30,7 +29,7 @@ public class BookingDAO {
                 "myEmail",
                 Arrays.asList("654 789 123", "693 582 471"),
                 new ArrayList<Flight>() {{
-                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN));
+                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany", "number1", new Date(), new Date(), BigDecimal.TEN, new Date(), null));
                 }}
         ));
 
@@ -43,7 +42,7 @@ public class BookingDAO {
                 "myEmail",
                 Arrays.asList("654 789 123", "693 582 471"),
                 new ArrayList<Flight>() {{
-                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany2", "number2", new Date(), new Date(), BigDecimal.TEN));
+                    add(new Flight("Madrid", "London", new Date(), new Date(), 0, 0, 1, "myCompany2", "number2", new Date(), new Date(), BigDecimal.TEN, new Date(), null));
                 }}
         ));
     }};
@@ -72,6 +71,9 @@ public class BookingDAO {
     }
 
     public void addFlightToBooking(Long bookingId, Flight flight) {
+        // In this moment added the flight to the Booking and start the 15 minutes.
+        flight.setCreationDateInTheBooking(new Date());
+
         // The zero will be the BookingId in Database
         bookingsMockList.get(0).getFlights().add(flight);
     }

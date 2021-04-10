@@ -60,7 +60,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Juan\",\r\n    \"lastName\" : \"Guerrero\",\r\n    \"address\" : \"myAddress\",\r\n    \"postalCode\" : \"myPostalCode\",\r\n    \"country\" : \"myCountry\",\r\n    \"email\" : \"myEmail\",\r\n    \"telephones\" : [\"657 456 987\"],\r\n    \"flights\" : [\r\n        {\r\n            \"airportOrigin\" : \"Miguelturra\",\r\n            \"airportDestination\" : \"Cordoba\",\r\n            \"dateFrom\" : \"2021-07-15\",\r\n            \"dateTo\" : \"2021-07-19\",\r\n            \"infants\" : 34,\r\n            \"children\" : 2,\r\n            \"adults\" : 45\r\n        }\r\n    ]\r\n}\r\n",
+					"raw": "{\r\n    \"name\" : \"Juan\",\r\n    \"lastName\" : \"Guerrero\",\r\n    \"address\" : \"myAddress\",\r\n    \"postalCode\" : \"myPostalCode\",\r\n    \"country\" : \"myCountry\",\r\n    \"email\" : \"myEmail\",\r\n    \"telephones\" : [\"657 456 987\"],\r\n    \"flights\" : [\r\n        {\r\n            \"airportOrigin\" : \"Miguelturra\",\r\n            \"airportDestination\" : \"Cordoba\",\r\n            \"dateFrom\" : \"2021-07-15\",\r\n            \"dateTo\" : \"2021-07-19\",\r\n            \"infants\" : 34,\r\n            \"children\" : 2,\r\n            \"adults\" : 45,\r\n            \"dateOfCreationInBooking\" : \"2022-04-05-12:12\"\r\n        }\r\n    ]\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -219,6 +219,34 @@
 			"name": "Delete a Booking",
 			"request": {
 				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookings/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm a Booking",
+			"request": {
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",

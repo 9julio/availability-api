@@ -58,7 +58,28 @@ public class Flight {
     @Setter
     private BigDecimal price;
 
-    public Flight(String airportOrigin, String airportDestination, Date dateFrom, Date dateTo, int infants, int children, int adults, String company, String flightNumber, Date date, Date hour, BigDecimal price) {
+    @Getter
+    @Setter
+    private Date creationDateInTheBooking;
+
+    @Getter
+    @Setter
+    private Date confirmationDateInTheBooking;
+
+    public Flight(String airportOrigin,
+                  String airportDestination,
+                  Date dateFrom,
+                  Date dateTo,
+                  int infants,
+                  int children,
+                  int adults,
+                  String company,
+                  String flightNumber,
+                  Date date,
+                  Date hour,
+                  BigDecimal price,
+                  Date creationDateInTheBooking,
+                  Date confirmationDateInTheBooking) {
         this.airportOrigin = airportOrigin;
         this.airportDestination = airportDestination;
         this.dateFrom = dateFrom;
@@ -71,6 +92,8 @@ public class Flight {
         this.date = date;
         this.hour = hour;
         this.price = price;
+        this.creationDateInTheBooking = creationDateInTheBooking;
+        this.confirmationDateInTheBooking = confirmationDateInTheBooking;
     }
 
     @Override
