@@ -4,6 +4,7 @@ import com.tui.proof.MainApplication;
 import com.tui.proof.dto.request.BookingRequest;
 import com.tui.proof.dto.request.FlightRequest;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
@@ -32,6 +34,16 @@ public class FlightControllerTests {
     private int port;
 
     public TestRestTemplate restTemplate = new TestRestTemplate();
+
+    @Before
+    public void init() {
+        restTemplate.getRestTemplate().setInterceptors(
+                Collections.singletonList((request, body, execution) -> {
+                    request.getHeaders()
+                            .add("Authorization", "123");
+                    return execution.execute(request, body);
+                }));
+    }
 
     @Test
     public void testOk_getAvailabilityFlights() {
@@ -74,6 +86,7 @@ public class FlightControllerTests {
                         "2022-04-05-12:12"
                 ))
         ));
+
 
         ResponseEntity response = restTemplate.exchange(
                 createURLWithPort("/bookings"),

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-// This class is use to simulate a DAO for Database
+// This class is use to simulate a DAO for Database, must be extends of JPA Repository and create and interface
 @Repository
 public class FlightDAO {
 

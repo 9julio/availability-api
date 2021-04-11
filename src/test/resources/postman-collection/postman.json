@@ -6,10 +6,76 @@
 	},
 	"item": [
 		{
+			"name": "Logging",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\" : \"user\",\r\n    \"password\" : \"pass\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/logging",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"logging"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Juan\",\r\n    \"lastName\" : \"Guerrero\",\r\n    \"address\" : \"myAddress\",\r\n    \"postalCode\" : \"myPostalCode\",\r\n    \"country\" : \"myCountry\",\r\n    \"email\" : \"myEmail\",\r\n    \"telephones\" : [\"657 456 987\"],\r\n    \"flights\" : [\r\n        {\r\n            \"airportOrigin\" : \"Miguelturra\",\r\n            \"airportDestination\" : \"Cordoba\",\r\n            \"dateFrom\" : \"2021-07-15\",\r\n            \"dateTo\" : \"2021-07-19\",\r\n            \"infants\" : 34,\r\n            \"children\" : 2,\r\n            \"adults\" : 45,\r\n            \"dateOfCreationInBooking\" : \"2022-04-05-12:12\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get flights",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/flights?airportOrigin=Madrid&airportDestination=London&dateFrom=2021-04-09&dateTo=2021-04-09&infants=0&children=0&adults=1",
 					"host": [
@@ -54,37 +120,16 @@
 			"response": []
 		},
 		{
-			"name": "Add Booking",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Juan\",\r\n    \"lastName\" : \"Guerrero\",\r\n    \"address\" : \"myAddress\",\r\n    \"postalCode\" : \"myPostalCode\",\r\n    \"country\" : \"myCountry\",\r\n    \"email\" : \"myEmail\",\r\n    \"telephones\" : [\"657 456 987\"],\r\n    \"flights\" : [\r\n        {\r\n            \"airportOrigin\" : \"Miguelturra\",\r\n            \"airportDestination\" : \"Cordoba\",\r\n            \"dateFrom\" : \"2021-07-15\",\r\n            \"dateTo\" : \"2021-07-19\",\r\n            \"infants\" : 34,\r\n            \"children\" : 2,\r\n            \"adults\" : 45,\r\n            \"dateOfCreationInBooking\" : \"2022-04-05-12:12\"\r\n        }\r\n    ]\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/bookings",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"bookings"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Add Flight to Booking",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"airportOrigin\" : \"Miguelturra\",\r\n    \"airportDestination\" : \"Cordoba\",\r\n    \"dateFrom\" : \"2021-07-15\",\r\n    \"dateTo\" : \"2021-07-19\",\r\n    \"infants\" : 34,\r\n    \"children\" : 2,\r\n    \"adults\" : 45\r\n}\r\n",
@@ -113,7 +158,13 @@
 			"name": "Delete a Flight to a Booking",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -143,7 +194,13 @@
 			"name": "Get Booking Details",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:8080/bookings?name=Juan&lastName=Pepe&address=address&postalCode=postalCode&country=country&email=email&telephones=123&airportOrigin=Madrid&airportDestination=London&dateFrom=2021-04-09&dateTo=2021-04-09&infants=0&children=0&adults=1",
 					"host": [
@@ -219,7 +276,13 @@
 			"name": "Delete a Booking",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -238,6 +301,13 @@
 					"path": [
 						"bookings",
 						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -247,7 +317,13 @@
 			"name": "Confirm a Booking",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "",
@@ -266,6 +342,13 @@
 					"path": [
 						"bookings",
 						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},
