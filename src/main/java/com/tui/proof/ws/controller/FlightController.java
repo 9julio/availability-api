@@ -73,10 +73,7 @@ public class FlightController {
               || flightRequest.getDateTo() == null
               || flightRequest.getInfants() == null
               || flightRequest.getChildren() == null
-              || flightRequest.getAdults() == null
-
-              // This date must be add for the front-end with the format yyyy-MM-dd-HH:mm
-              || flightRequest.getDateOfCreationInBooking() == null) {
+              || flightRequest.getAdults() == null) {
 
         log.error("The flight request must not be null or contain empty values!");
 

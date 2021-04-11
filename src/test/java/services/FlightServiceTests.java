@@ -56,7 +56,7 @@ public class FlightServiceTests {
                 ArgumentMatchers.anyInt()
         )).thenReturn(flights);
 
-        List<FlightResponse> response = flightService.getAvailabilityFlights(new FlightRequest("Madrid", "London", null, null, 0, 0, 0, "2022-04-05-12:12"));
+        List<FlightResponse> response = flightService.getAvailabilityFlights(new FlightRequest("Madrid", "London", null, null, 0, 0, 0));
         Assert.assertNotNull(response);
         Assert.assertEquals(2, response.size());
     }
@@ -65,8 +65,8 @@ public class FlightServiceTests {
     public void test_addBooking_OK() {
 
         List<FlightRequest> flightRequestList = new ArrayList<FlightRequest>(){{
-            add(new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1, "2022-04-05-12:12"));
-            add(new FlightRequest("London", "Madrid", "2021-04-05", "2021-04-05", 1, 4, 34, "2022-04-05-12:12"));
+            add(new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1));
+            add(new FlightRequest("London", "Madrid", "2021-04-05", "2021-04-05", 1, 4, 34));
         }};
 
         BookingRequest bookingRequest = new BookingRequest(
@@ -94,7 +94,7 @@ public class FlightServiceTests {
     @Test
     public void test_addFlightToBooking_OK() {
 
-        FlightRequest request = new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1, "2022-04-05-12:12");
+        FlightRequest request = new FlightRequest("Madrid", "London", "2021-04-05", "2021-04-05", 0, 0, 1);
 
         Mockito.doNothing().when(bookingDAOMock).addFlightToBooking(ArgumentMatchers.anyLong(), ArgumentMatchers.any());
 

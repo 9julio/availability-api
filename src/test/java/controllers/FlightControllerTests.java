@@ -82,8 +82,7 @@ public class FlightControllerTests {
                         "2022-04-09",
                         12,
                         45,
-                        67,
-                        "2022-04-05-12:12"
+                        67
                 ))
         ));
 
@@ -116,8 +115,7 @@ public class FlightControllerTests {
                         "2022-04-09",
                         12,
                         45,
-                        67,
-                        "2022-04-05-12:12"
+                        67
                 ))
         ));
 
@@ -142,8 +140,7 @@ public class FlightControllerTests {
                         "2022-04-09",
                         12,
                         45,
-                        67,
-                        "2022-04-05-12:12"
+                        67
                 )
         );
 

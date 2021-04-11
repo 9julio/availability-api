@@ -26,6 +26,8 @@ import java.util.List;
 @Service
 public class FlightService {
 
+    private static final long DIFFERENCE_IN_MINUTES = 15;
+
     @Autowired
     public FlightDAO flightDAO;
 
@@ -48,12 +50,13 @@ public class FlightService {
         List<Flight> flightResponseList = new ArrayList<Flight>();
         // Calculate the 15 minutes
         // Note: It is possible to calculate here or in the Database (the results will be clean), but for the test do here.
+        // Note: Can not use the datas with more than 15 minutes
         for (Flight flight : flights) {
 
             Date actualDate = new Date();
 
             long difference = DateUtils.calculateDifferenceInMinutesBetweenDates(flight.getCreationDateInTheBooking(), actualDate);
-            if (difference >= 15) {
+            if (difference >= DIFFERENCE_IN_MINUTES) {
                 log.error(String.format("The flight with number %s has more 15 minutes duration.", flight.getFlightNumber()));
             } else {
                 flightResponseList.add(flight);
@@ -97,21 +100,27 @@ public class FlightService {
     public ResponseEntity addBooking(BookingRequest request) {
         // TODO: Do all the business logic for verify that is correct.
 
-        for (FlightRequest flight : request.getFlights()) {
+        Booking booking = MapperUtils.mapBookingRequestToBookingEntity(request);
+        for (Flight flight : booking.getFlights()) {
 
             // Validate that the date of the creation of the Flight for the client only have 15 minutes. If the Flight not check it, return an ERROR
 
             Date actualDate = new Date();
 
-            long difference = DateUtils.calculateDifferenceInMinutesBetweenDates(DateUtils.convertFrontendDateToDateFormat(flight.getDateOfCreationInBooking()), actualDate);
-            if (difference >= 15) {
+            // TODO: This date set when added the flight to a booking, but in this past can not search this info in DataBase and mock it
+            if (flight.getCreationDateInTheBooking() == null) {
+                flight.setCreationDateInTheBooking(new Date());
+            }
+
+            long difference = DateUtils.calculateDifferenceInMinutesBetweenDates(flight.getCreationDateInTheBooking(), actualDate);
+            if (difference >= DIFFERENCE_IN_MINUTES) {
                 return ResponseEntity
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("The availability of the flight has more than 15 minutes of duration!");
             }
         }
 
-        bookingDAO.addBooking(MapperUtils.mapBookingRequestToBookingEntity(request));
+        bookingDAO.addBooking(booking);
         log.debug("Booking was added correctly!");
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -196,7 +205,7 @@ public class FlightService {
             Date actualDate = new Date();
 
             long difference = DateUtils.calculateDifferenceInMinutesBetweenDates(flight.getCreationDateInTheBooking(), actualDate);
-            if (difference >= 15) {
+            if (difference >= DIFFERENCE_IN_MINUTES) {
                 return ResponseEntity
                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("The availability of the flight has more than 15 minutes of duration!");

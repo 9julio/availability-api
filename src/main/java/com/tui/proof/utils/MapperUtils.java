@@ -91,7 +91,7 @@ public class MapperUtils {
                 null,
                 null,
                 null,
-                DateUtils.convertStringDateToDateWithFormat(flightRequest.getDateOfCreationInBooking()),
+                null,
                 null
         );
     }

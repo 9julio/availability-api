@@ -36,11 +36,7 @@ public class FlightRequest {
     @Setter
     private Integer adults;
 
-    @Getter
-    @Setter
-    private String dateOfCreationInBooking;
-
-    public FlightRequest(String airportOrigin, String airportDestination, String dateFrom, String dateTo, Integer infants, Integer children, Integer adults, String dateOfCreationInBooking) {
+    public FlightRequest(String airportOrigin, String airportDestination, String dateFrom, String dateTo, Integer infants, Integer children, Integer adults) {
         this.airportOrigin = airportOrigin;
         this.airportDestination = airportDestination;
         this.dateFrom = dateFrom;
@@ -48,7 +44,6 @@ public class FlightRequest {
         this.infants = infants;
         this.children = children;
         this.adults = adults;
-        this.dateOfCreationInBooking = dateOfCreationInBooking;
     }
 
     @Override
